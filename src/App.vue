@@ -1,10 +1,20 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link :class="{active:$route.name==='home'}" to="/">Главная</router-link> |
+    <router-link :class="{active:$route.name==='CartView'}" to="/cart">Корзина</router-link>
   </nav>
   <router-view/>
 </template>
+
+<script>
+export default {
+  mounted(){
+    this.$store.commit('updateCartFromLocalStorage')
+  }
+}
+
+
+</script>
 
 <style lang="less">
 #app {
@@ -22,9 +32,14 @@ nav {
     font-weight: bold;
     color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
+    &.active {
+      color: #4279b9;
     }
   }
+}
+
+html,body{
+  margin:0;
+  padding:0;
 }
 </style>
